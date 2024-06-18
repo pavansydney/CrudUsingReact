@@ -43,7 +43,7 @@ function Form(props) {
 
                     >
 
-                        <option value='-1'></option>
+                        <option value={''} disabled selected>Select the category</option>
                         <option value={'mobiles'}>Mobiles</option>
                         <option value={'laptops'}>Laptops</option>
                         <option value={'tv'}>TV's</option>

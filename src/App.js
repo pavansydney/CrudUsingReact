@@ -59,7 +59,7 @@ const App = () => {
             <h2 className="text-primary text-center">CRUD Operations with React JS</h2>
             <button className="btn btn-primary float-end" onClick={() => { showForm() }}>Add new</button>
             <ProductList products={products} deleteProduct={deleteProduct} editProduct={editProduct}></ProductList>
-            {openForm && <ProductForm addProduct={addProduct} data={initialForm} closeForm={closeForm}  ></ProductForm>}
+            {openForm && <ProductForm addP={addProduct} data={initialForm} close={closeForm}  ></ProductForm>}
         </div>
 
     )
