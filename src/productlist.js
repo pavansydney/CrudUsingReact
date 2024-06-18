@@ -1,3 +1,4 @@
+// Code for displaying the product list in a table format
 function ProductList({ products, deleteProduct, editProduct }) {
     return (
         <table className='table m-3 '>
@@ -12,8 +13,8 @@ function ProductList({ products, deleteProduct, editProduct }) {
             </thead>
             <tbody>
                 {
-                    products.map((data) => (
-                        <tr key={data.id} >
+                    products.map((data, index) => (
+                        <tr key={data.id} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2 !important' : '#ffffff !important' }}>
                             {/* <td>{data.id}</td> */}
                             <td>{data.name}</td>
                             <td>{data.price}</td>
