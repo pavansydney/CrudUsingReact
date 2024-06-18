@@ -1,79 +1,69 @@
-import Form from "./Form"
-import Table from "./Table"
-import { useEffect, useState } from "react"
-import { getData, deleteData, postData, putData } from './api'
+import React from "react";
+import ProductList from "./productlist";
+import { deleteData, getData, putData, postData } from './api';
+import { useEffect, useState } from 'react';
+import ProductForm from "./Form"
 
+const App = () => {
+    const [products, setProducts] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [openForm, setOpenForm] = useState(false);
+    const [initialForm, setForm] = useState({ name: '', price: '', category: '' })
+    useEffect(() => {
+        getAllProducts();
+    }, [])
 
-function App() {
-  const [products, setProducts] = useState([])
-  const [openForm, setOpenForm] = useState(false)
-  const [edit, setEdit] = useState(false);
-  const [initialForm, setForm] = useState({
-    title : '',
-    body : ''
-  })
-  useEffect(
-    () => {
-      getProductdetails()
-    }, []
-  )
-
-  let getProductdetails = async () => {
-    let res = await getData();
-    setProducts(res.data);
-  }
-
-  let deleteProduct = async (id) => {
-    await deleteData(id);
-    getProductdetails();
-  }
-
-  let addProduct = async (product) => {
-    let data = {
-      title : product.title,
-      body : product.body
+    async function getAllProducts() {
+        const response = await getData();
+        setProducts(response.data);
     }
-    if(edit){
-      await putData(product.id,data);
+    async function addProduct(product) {
+        let data = {
+            name: product.name,
+            price: product.price,
+            category: product.category
+        }
+        if (edit)
+            await putData(product.id, data);
+        else
+            await postData(data);
+        getAllProducts();
+        setOpenForm(false);
+
+
     }
-    else {
-      await postData(data);
-    getProductdetails();
-    setOpenForm(false);
+    async function deleteProduct(id) {
+        await deleteData(id);
+        getAllProducts();
     }
-  }
 
-  let editProduct = async (data) => {
-    setForm(data);
-    setOpenForm(true);
-    setEdit(true);
-  }
+    function editProduct(value) {
+        setEdit(true);
+        setOpenForm(true);
+        setForm(value)
 
-  let showForm = () => {
-    setOpenForm(true);
-    setForm({
-      title:'',
-      body:''
-    })
-  }
+    }
+    function closeForm() {
+        setOpenForm(false)
+    }
+    function showForm() {
+        setForm({ name: '', price: '', category: '' })
+        setOpenForm(true);
+        setEdit(false);
 
-  let closeForm = () => {
-    setOpenForm(false);
-  }
+    }
 
-  return (
-    <div className="wrapper m-5 w-50">
-      <h2 className="text-primary">CRUD OPERATIONS</h2>
-      <button className="btn btn-primary" onClick={() => {
-        showForm()
-      }}>Add Product</button>
-      <Table products={products} delete={deleteProduct} edit={editProduct}></Table>
-      {
-        openForm && <Form closeForm={closeForm} data={initialForm} add={addProduct}></Form>
-      }
-    </div>
+    return (
 
-  )
-}
+        <div className="wrapper m-5 w-50">
+            <h2 className="text-primary text-center">CRUD Operations with React JS</h2>
+            <button className="btn btn-primary float-end" onClick={() => { showForm() }}>Add new</button>
+            <ProductList products={products} deleteProduct={deleteProduct} editProduct={editProduct}></ProductList>
+            {openForm && <ProductForm addProduct={addProduct} data={initialForm} closeForm={closeForm}  ></ProductForm>}
+        </div>
 
-export default App
+    )
+
+};
+
+export default App;
