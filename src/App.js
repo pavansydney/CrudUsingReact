@@ -31,12 +31,12 @@ const App = () => {
         if (edit)
           { 
             await putData(product.id, data);
-            toast.success('Product updated successfully');
+            toast.success(`Product ${data.name} edited successfully`);
           }
         else
         { 
           await postData(data);
-          toast.success('Product added successfully');
+          toast.success(`New Product with ${data.name} added successfully`);
         }
         getAllProducts();
         setOpenForm(false);
@@ -44,6 +44,7 @@ const App = () => {
 
     async function deleteProduct(id) {
         await deleteData(id);
+        toast.success(`Product with Id ${id} deleted successfully`);
         getAllProducts();
     }
 
