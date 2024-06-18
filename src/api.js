@@ -14,3 +14,11 @@ export async function postData(data){
         }
     });
 }
+
+export async function putData(id,data){
+    return await axios.put(url + "/" + id,data,{
+        headers:{
+            'Content-Type':'application/json'
+        }
+    });
+}

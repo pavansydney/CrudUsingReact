@@ -21,7 +21,11 @@ function Table(props) {
                             <td>{data.title}</td>
                             <td>{data.body}</td>
                             <td>
-                                <button className="btn btn-primary m-1">
+                                <button className="btn btn-primary m-1"
+                                onClick={() => {
+                                    props.edit(data)
+                                }}
+                                >
                                     Edit
                                 </button>
                                 <button className="btn btn-danger m-1"
