@@ -3,6 +3,8 @@ import ProductList from "./productlist";
 import { deleteData, getData, putData, postData } from './api';
 import ProductForm from "./Form";
 import Footer from "./Footer";
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
     const [products, setProducts] = useState([]);
@@ -26,8 +28,16 @@ const App = () => {
 
     async function addProduct(product) {
         let data = { name: product.name, price: product.price, category: product.category };
-        if (edit) await putData(product.id, data);
-        else await postData(data);
+        if (edit)
+          { 
+            await putData(product.id, data);
+            toast.success('Product updated successfully');
+          }
+        else
+        { 
+          await postData(data);
+          toast.success('Product added successfully');
+        }
         getAllProducts();
         setOpenForm(false);
     }
@@ -105,6 +115,16 @@ const App = () => {
               editProduct={editProduct}
             />
             {openForm && <ProductForm add={addProduct} data={initialForm} close={closeForm} />}
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover />
             <div>{renderPageNumbers}</div>
             <Footer />
         </div>
