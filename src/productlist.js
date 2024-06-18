@@ -3,7 +3,7 @@ function ProductList({ products, deleteProduct, editProduct }) {
         <table className='table m-3 '>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    {/* <th>ID</th> */}
                     <th>Name</th>
                     <th>Price</th>
                     <th>Category</th>
@@ -14,7 +14,7 @@ function ProductList({ products, deleteProduct, editProduct }) {
                 {
                     products.map((data) => (
                         <tr key={data.id} >
-                            <td>{data.id}</td>
+                            {/* <td>{data.id}</td> */}
                             <td>{data.name}</td>
                             <td>{data.price}</td>
                             <td>{data.category}</td>
