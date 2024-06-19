@@ -12,8 +12,8 @@ const App = () => {
     const [openForm, setOpenForm] = useState(false);
     const [initialForm, setForm] = useState({ name: '', price: '', category: '' });
     const [searchTerm, setSearchTerm] = useState('');
-    const [sortCriteria, setSortCriteria] = useState('name');
-    const [sortOrder, setSortOrder] = useState('asc');
+    const [sortCriteria] = useState('name');
+    const [sortOrder] = useState('asc');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5); // Adjust as needed
 
@@ -27,7 +27,7 @@ const App = () => {
     }
 
     async function addProduct(product) {
-        let data = { name: product.name, price: product.price, category: product.category };
+        let data = { name: product.name, price: Number(product.price), category: product.category };
         if (edit)
           { 
             await putData(product.id, data);
@@ -92,17 +92,6 @@ const App = () => {
         <div className="wrapper m-5 w-50">
             <h2 className="text-danger text-center">REACT JS CRUD OPERATIONS</h2>
             <button className="btn btn-primary m-2 float-end" onClick={showForm}>Add new</button>
-            <div>
-              <select value={sortCriteria} onChange={(e) => setSortCriteria(e.target.value)} className="form-select mb-3">
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="category">Category</option>
-              </select>
-              <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="form-select mb-3">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
-            </div>
             <input
               type="text"
               placeholder="Search products..."

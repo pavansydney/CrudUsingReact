@@ -69,7 +69,7 @@ function Form(props) {
 
                     }}
 
-                >Send</button>
+                >{product.id ? 'Update' : 'Add'}</button>
                 <button className="btn btn-danger float-end"
                     onClick={(e) => {
                         e.preventDefault();
