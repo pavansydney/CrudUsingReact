@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = "http://localhost:4200/products";
+const url = process.env.NODE_ENV === 'development' ? "http://localhost:4200/products" : "https://pavansydney.github.io/CrudUsingReact";
 
 export async function getData() {
     return await axios.get(`${url}`);
