@@ -67,13 +67,6 @@ const App = () => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = products
-      .sort((a, b) => {
-        if (sortOrder === 'asc') {
-          return a[sortCriteria].localeCompare(b[sortCriteria], 'en', { numeric: true });
-        } else {
-          return b[sortCriteria].localeCompare(a[sortCriteria], 'en', { numeric: true });
-        }
-      })
       .filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.category.toLowerCase().includes(searchTerm.toLowerCase())
