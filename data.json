@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "name": "IPhone 14",
+      "price": 72500,
+      "category": "mobiles",
+      "id": "84c7"
+    },
+    {
+      "id": "4d7c",
+      "name": "Samsung",
+      "price": 25000,
+      "category": "mobiles"
+    },
+    {
+      "id": "8d33",
+      "name": "IPhone 14 Pro Max",
+      "price": 150000,
+      "category": "mobiles"
+    }
+  ]
+}
