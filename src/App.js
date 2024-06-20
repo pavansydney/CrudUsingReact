@@ -12,14 +12,33 @@ const App = () => {
   const [openForm, setOpenForm] = useState(false);
   const [initialForm, setForm] = useState({ name: '', price: '', category: '' });
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortCriteria] = useState('name');
-  const [sortOrder] = useState('asc');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5); // Adjust as needed
+  // New state variable for maintenance mode
+  const [isUnderMaintenance] = useState(true); // Set to true to activate maintenance mode
+
+   // Correctly placed useEffect
+   useEffect(() => {
+    // Conditionally execute code inside useEffect
+    if (!isUnderMaintenance) {
+      // Your effect logic here, executed only when isUnderMaintenance is false
+    }
+  }, [isUnderMaintenance]); // Make sure to include isUnderMaintenance in the dependency array
 
   useEffect(() => {
     getAllProducts();
   }, []);
+
+  // Conditional rendering based on maintenance state
+  if (isUnderMaintenance) {
+    return (
+      <div className="maintenance-message" style={{ textAlign: 'center', marginTop: '20%' }}>
+        <h1>Site Under Maintenance</h1>
+        <p>We are currently performing scheduled maintenance. We will be back shortly. Thank you for your patience.</p>
+        <Footer />
+      </div>
+    );
+  }
 
   async function getAllProducts() {
     const response = await getData();
