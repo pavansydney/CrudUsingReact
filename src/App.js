@@ -42,7 +42,7 @@ const App = () => {
 
   async function getAllProducts() {
     const response = await getData();
-    setProducts(response.data);
+    setProducts(response);
   }
 
   async function addProduct(product) {

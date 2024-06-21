@@ -1,8 +1,10 @@
 import axios from 'axios';
-const url = process.env.NODE_ENV === 'development' ? "http://localhost:4200/products" : "https://pavansydney.github.io/CrudUsingReact";
+const url = process.env.NODE_ENV === 'development' ? "http://localhost:4200/api/products" : "https://pavansydney.github.io/CrudUsingReact";
 
 export async function getData() {
-    return await axios.get(`${url}`);
+    const response = await axios.get(`${url}`);
+    // Assuming the product data is directly under response.data
+    return response.data.products; // Adjust "products" to the actual key where the product data is stored
 }
 
 export async function postData(data) {
